@@ -1,4 +1,4 @@
-package com.karthik.explistviewspinner;
+package com.duxetech.explistviewspinner;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+/**
+ * Created by Karthik Swamy on 22/11/18.
+ */
 
 class ExpandableLVAdapter extends BaseExpandableListAdapter {
 

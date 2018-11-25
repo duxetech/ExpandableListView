@@ -1,4 +1,4 @@
-package com.karthik.explistviewspinner;
+package com.duxetech.explistviewspinner;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

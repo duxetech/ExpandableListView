@@ -1,4 +1,4 @@
-package com.karthik.explistviewspinner;
+package com.duxetech.explistviewspinner;
 
 import org.junit.Test;
 

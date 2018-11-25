@@ -1,4 +1,4 @@
-package com.karthik.explistviewspinner;
+package com.duxetech.explistviewspinner;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,22 +7,21 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Created by Karthik Swamy on 22/11/18.
+ */
 public class MainActivity extends AppCompatActivity {
 
     EditText input;
