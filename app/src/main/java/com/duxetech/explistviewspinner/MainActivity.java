@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> BedRoom = new ArrayList<>();
     ArrayList<String> Kitchen = new ArrayList<>();
     ArrayList<String> WashRoom = new ArrayList<>();
+    ArrayList<String> finalRoom = new ArrayList<>();
     HashMap<String,ArrayList<String>> home;
     Set<String> buffer = new LinkedHashSet<>();
 
@@ -54,9 +55,7 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(spAdapter);
 
         home = new HashMap<>();
-        buildHome();
-        exlvAdapter = new ExpandableLVAdapter(MainActivity.this,rooms,home);
-        expLV.setAdapter(exlvAdapter);
+        //buildHome();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -72,30 +71,43 @@ public class MainActivity extends AppCompatActivity {
         btn_enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inputItem = input.getText().toString();
+                inputItem = input.getText().toString().trim();
                 if (roomID>0) {
                     if (!inputItem.isEmpty()) {
                         switch (roomID)
                         {
                             case 1:
                                 LivingRoom.add(inputItem);
+                                finalRoom.add(rooms.get(roomID));
+                                removeDuplicate(finalRoom);
                                 removeDuplicate(LivingRoom);
+                                home.put(rooms.get(roomID),LivingRoom);
                                 break;
                             case 2:
                                 BedRoom.add(inputItem);
+                                finalRoom.add(rooms.get(roomID));
+                                removeDuplicate(finalRoom);
                                 removeDuplicate(BedRoom);
+                                home.put(rooms.get(roomID),BedRoom);
                                 break;
                             case 3:
                                 Kitchen.add(inputItem);
+                                finalRoom.add(rooms.get(roomID));
+                                removeDuplicate(finalRoom);
                                 removeDuplicate(Kitchen);
+                                home.put(rooms.get(roomID),Kitchen);
                                 break;
                             case 4:
                                 WashRoom.add(inputItem);
+                                finalRoom.add(rooms.get(roomID));
+                                removeDuplicate(finalRoom);
                                 removeDuplicate(WashRoom);
+                                home.put(rooms.get(roomID),WashRoom);
                                 break;
                          }
-                         buildHome();
-                        exlvAdapter.notifyDataSetChanged();
+                        exlvAdapter = new ExpandableLVAdapter(MainActivity.this,finalRoom,home);
+                        expLV.setAdapter(exlvAdapter);
+                       // exlvAdapter.notifyDataSetChanged();
                         input.setText("");
                     } else
                         Toast.makeText(MainActivity.this, "Enter some items", Toast.LENGTH_SHORT).show();
@@ -115,13 +127,16 @@ public class MainActivity extends AppCompatActivity {
                 lastGroupPosition = groupPosition;
             }
         });
+
+        expLV.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Toast.makeText(MainActivity.this, finalRoom.get(groupPosition)+" : "+home.get(finalRoom.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
     }
-    void buildHome(){
-        home.put(rooms.get(1),LivingRoom);
-        home.put(rooms.get(2),BedRoom);
-        home.put(rooms.get(3),Kitchen);
-        home.put(rooms.get(4),WashRoom);
-    }
+
     void removeDuplicate(ArrayList<String>list){
         buffer.addAll(list);
         list.clear();

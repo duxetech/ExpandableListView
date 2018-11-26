@@ -29,12 +29,12 @@ class ExpandableLVAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return list.size()-1;
+        return list.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return hm.get(list.get(groupPosition+1)).size();
+        return hm.get(list.get(groupPosition)).size();
     }
 
     @Override
@@ -67,7 +67,7 @@ class ExpandableLVAdapter extends BaseExpandableListAdapter {
         LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inf.inflate(R.layout.titles,parent,false);
         TextView tv = view.findViewById(R.id.listTitle);
-        tv.setText(list.get(groupPosition+1));
+        tv.setText(list.get(groupPosition));
         return view;
     }
 
@@ -76,7 +76,7 @@ class ExpandableLVAdapter extends BaseExpandableListAdapter {
         LayoutInflater inf = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view  = inf.inflate(R.layout.items,parent,false);
         TextView tv = view.findViewById(R.id.list_content);
-        tv.setText(hm.get(list.get(groupPosition+1)).get(childPosition));
+        tv.setText(hm.get(list.get(groupPosition)).get(childPosition));
         return view;
     }
 
