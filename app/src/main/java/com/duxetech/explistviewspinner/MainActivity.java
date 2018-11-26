@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> BedRoom = new ArrayList<>();
     ArrayList<String> Kitchen = new ArrayList<>();
     ArrayList<String> WashRoom = new ArrayList<>();
-    ArrayList<String> finalRoom = new ArrayList<>();
+    ArrayList<String> selectedRoom = new ArrayList<>();
     HashMap<String,ArrayList<String>> home;
     Set<String> buffer = new LinkedHashSet<>();
 
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(spAdapter);
 
         home = new HashMap<>();
-        //buildHome();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -78,36 +77,35 @@ public class MainActivity extends AppCompatActivity {
                         {
                             case 1:
                                 LivingRoom.add(inputItem);
-                                finalRoom.add(rooms.get(roomID));
-                                removeDuplicate(finalRoom);
+                                selectedRoom.add(rooms.get(roomID));
+                                removeDuplicate(selectedRoom);
                                 removeDuplicate(LivingRoom);
                                 home.put(rooms.get(roomID),LivingRoom);
                                 break;
                             case 2:
                                 BedRoom.add(inputItem);
-                                finalRoom.add(rooms.get(roomID));
-                                removeDuplicate(finalRoom);
+                                selectedRoom.add(rooms.get(roomID));
+                                removeDuplicate(selectedRoom);
                                 removeDuplicate(BedRoom);
                                 home.put(rooms.get(roomID),BedRoom);
                                 break;
                             case 3:
                                 Kitchen.add(inputItem);
-                                finalRoom.add(rooms.get(roomID));
-                                removeDuplicate(finalRoom);
+                                selectedRoom.add(rooms.get(roomID));
+                                removeDuplicate(selectedRoom);
                                 removeDuplicate(Kitchen);
                                 home.put(rooms.get(roomID),Kitchen);
                                 break;
                             case 4:
                                 WashRoom.add(inputItem);
-                                finalRoom.add(rooms.get(roomID));
-                                removeDuplicate(finalRoom);
+                                selectedRoom.add(rooms.get(roomID));
+                                removeDuplicate(selectedRoom);
                                 removeDuplicate(WashRoom);
                                 home.put(rooms.get(roomID),WashRoom);
                                 break;
                          }
-                        exlvAdapter = new ExpandableLVAdapter(MainActivity.this,finalRoom,home);
+                        exlvAdapter = new ExpandableLVAdapter(MainActivity.this,selectedRoom,home);
                         expLV.setAdapter(exlvAdapter);
-                       // exlvAdapter.notifyDataSetChanged();
                         input.setText("");
                     } else
                         Toast.makeText(MainActivity.this, "Enter some items", Toast.LENGTH_SHORT).show();
@@ -131,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         expLV.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(MainActivity.this, finalRoom.get(groupPosition)+" : "+home.get(finalRoom.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, selectedRoom.get(groupPosition)+" : "+home.get(selectedRoom.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
